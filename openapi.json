@@ -1,0 +1,255 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Faethm API",
+    "description": "API definitions for CobraKai project.",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/skills/extract": {
+      "post": {
+        "tags": [
+          "skills"
+        ],
+        "summary": "Skill Exploder (API 1)",
+        "description": "Return a set of skills identified from text input",
+        "requestBody": {
+          "description": "Text that needs to be analyzed",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "description": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "List of extracted skills",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "skills": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/skills/courses": {
+      "get": {
+        "tags": [
+          "skills"
+        ],
+        "summary": "Skill Explorer (courses, API 3)",
+        "description": "Return a set of courses identified from skill names",
+        "parameters": [
+          {
+            "name": "skills",
+            "in": "query",
+            "description": "Skills to find courses for",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Best matched courses",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "courses": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/skills/jobs": {
+      "get": {
+        "tags": [
+          "skills"
+        ],
+        "summary": "Skill Explorer (jobs, API 4)",
+        "description": "Return a set of jobs identified from skill names",
+        "parameters": [
+          {
+            "name": "skills",
+            "in": "query",
+            "description": "Skills to find jobs for",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Best matched jobs",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "jobs": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/skills/{skill}/insight": {
+      "get": {
+        "tags": [
+          "skills"
+        ],
+        "summary": "Return insights from skill name (API 5)",
+        "parameters": [
+          {
+            "name": "skill",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "region",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SCHEMA TBD; top jobs and mentions; monthly total mentions; related skills",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/jobs/match": {
+      "post": {
+        "tags": [
+          "jobs"
+        ],
+        "summary": "Job Expander (API 2)",
+        "description": "Return a set of likely jobs from text input",
+        "requestBody": {
+          "description": "Text that needs to be analyzed",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "SCHEMA TBD List of jobs with descriptions and other data points",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/jobs/{job}/insight": {
+      "get": {
+        "tags": [
+          "jobs"
+        ],
+        "summary": "Return insights from job name (API 6)",
+        "parameters": [
+          {
+            "name": "job",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "region",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SCHEMA TBD top skills by mentions; top skills by specificity; monthly total mentions; related jobs",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
